@@ -1,13 +1,16 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap&subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese");
 @import "../node_modules/react-modal-video/css/modal-video.min.css";
 
-body {
+body,
+html {
   margin: 0;
+  padding: 0;
   background-color: rgb(243, 243, 243);
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 code {
@@ -170,8 +173,15 @@ code {
 }
 
 @media screen and (max-width: 730px) {
+  body {
+    margin: 0 !important;
+    width: 100% !important;
+    position: relative;
+    overflow-x: hidden !important;
+  }
   .main-page {
-    margin: 0px;
+    margin: 0 !important;
+    overflow-x: hidden !important;
   }
   .header-part-two {
     padding-top: 25px;

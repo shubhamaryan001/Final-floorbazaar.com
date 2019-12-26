@@ -3,8 +3,10 @@ import ModalVideo from "react-modal-video";
 import { FaPlay } from "react-icons/fa";
 import Typed from "react-typed";
 import Slide from "react-reveal/Slide";
+
 import Trending from "./TrendingSection";
 import Blurb from "./BlurbMain";
+import HomeProduct from "./MainPageProducts";
 export default class Home extends Component {
   constructor() {
     super();
@@ -105,8 +107,9 @@ export default class Home extends Component {
           </div>
         </div>
         {/* -------------------------------------------Section-2--------------------------- */}
-        <Trending />
         <Blurb />
+        <Trending />
+        <HomeProduct />
       </div>
     );
   }

@@ -563,6 +563,95 @@ section .section-title {
   }
 }
 
+/* ---------------------------AUTH FORM-------------------- */
+
+.auth-form {
+  position: relative;
+}
+.auth-form label {
+  color: #f4714d !important;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.custom-file-control,
+.form-control,
+.is-focused .custom-file-control,
+.is-focused .form-control {
+  background-image: linear-gradient(0deg, #f4714d 1px, rgba(0, 150, 136, 0) 0),
+    linear-gradient(0deg, #f4714d 1px, rgba(0, 150, 136, 0) 0);
+}
+
+.spinner-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+/* .spinner-bg:after {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  content: "";
+  filter: blur(5px);
+} */
+.spinner-position {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.background-card {
+  background-image: linear-gradient(
+      to right,
+      rgba(244, 107, 69, 0.8),
+      rgba(238, 168, 73, 0.8)
+    ),
+    url("https://res.cloudinary.com/djnv06fje/image/upload/v1577390249/photo-1571566844267-2f4c36350ad1_cguuc5.jpg");
+  background-position: left bottom;
+  background-size: cover;
+  margin: 0 auto;
+  width: 26rem;
+  height: 100%;
+  padding: 10px 25px 10px 25px;
+  border-radius: 10px;
+}
+.main-card {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  margin-left: 55px;
+  border-radius: 10px;
+}
+
+@media (max-width: 767px) {
+  .background-card {
+    background-image: linear-gradient(
+        to right,
+        rgba(244, 107, 69, 0.8),
+        rgba(238, 168, 73, 0.8)
+      ),
+      url("https://res.cloudinary.com/djnv06fje/image/upload/v1577390249/photo-1571566844267-2f4c36350ad1_cguuc5.jpg");
+    background-position: left bottom;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    padding: 10px 15px 10px 15px;
+    border-radius: 10px;
+  }
+  .main-card {
+    padding: 10px;
+    margin-left: 0px;
+    border-radius: 10px;
+  }
+}
 /* ----------------COMMON CSS--------------- */
 .section-standard-height {
   background-color: #fff !important;
@@ -578,6 +667,75 @@ section .section-title {
 }
 
 /* -----------------------------ANIMATION SECTIONS-------------------------- */
+
+@-webkit-keyframes spinner-border {
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinner-border {
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.spinner-border {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  vertical-align: text-bottom;
+  border: 0.25em solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  -webkit-animation: spinner-border 0.75s linear infinite;
+  animation: spinner-border 0.75s linear infinite;
+}
+
+.spinner-border-sm {
+  width: 1rem;
+  height: 1rem;
+  border-width: 0.2em;
+}
+
+@-webkit-keyframes spinner-grow {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes spinner-grow {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.spinner-grow {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  vertical-align: text-bottom;
+  background-color: currentColor;
+  border-radius: 50%;
+  opacity: 0;
+  -webkit-animation: spinner-grow 0.75s linear infinite;
+  animation: spinner-grow 0.75s linear infinite;
+}
+
+.spinner-grow-sm {
+  width: 1rem;
+  height: 1rem;
+}
 
 @keyframes shadow-pulse {
   0% {

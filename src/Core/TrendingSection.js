@@ -62,7 +62,7 @@ const TrendingSection = () => {
           We stay on top of our industry by being experts in yours.
         </p>
       </div>
-      <Fade bottom duration={2000}>
+      <Fade center duration={2500}>
         <div className="container p-3" style={{ minWidth: "90%" }}>
           <div className="row">
             <div className="col-xl-12 col-md-12 col-sm-12">

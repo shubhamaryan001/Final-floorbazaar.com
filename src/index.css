@@ -191,6 +191,7 @@ code {
   .section-standard-height {
     background-color: #fff !important;
     padding-top: 5px !important;
+    padding-bottom: 5px !important;
   }
   .header-part-two {
     padding-top: 25px;
@@ -843,11 +844,22 @@ section .section-title {
   font-size: 30px;
 }
 
+/* ------------------PROFILE PAGE-------------------- */
+
+.profile-pic {
+  object-fit: cover;
+  min-height: 150px;
+  min-width: 150px;
+  max-height: 150px;
+  max-width: 150px;
+  margin: 0 auto;
+}
+
 /* ----------------COMMON CSS--------------- */
 .section-standard-height {
   background-color: #fff !important;
   padding-top: 8rem;
-  padding-bottom: 5rem !important;
+  padding-bottom: 5rem;
   padding-left: 0 !important;
   padding-right: 0 !important;
   min-height: 70vh !important;

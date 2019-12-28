@@ -19,7 +19,7 @@ import Tab from "react-bootstrap/Tab";
 import "../index.css";
 const ProductSingle = props => {
   let [product, setProduct] = useState({});
-
+  const [btndisable, setBtn] = useState(false);
   const [price, setPrice] = useState();
   const [name, setName] = useState();
   const [relatedProduct, setRelatedProduct] = useState([]);
@@ -66,6 +66,7 @@ const ProductSingle = props => {
 
   const RenderVariant = e => {
     e.preventDefault();
+    setBtn(true);
     let price = e.target.dataset.price;
     let area = e.target.dataset.area;
     setPrice(e.target.dataset.price);
@@ -419,6 +420,7 @@ const ProductSingle = props => {
   return (
     <div className="container-fluid  section-standard-height">
       <div className="container product-box">
+        {shouldRedirect(redirect)}
         <div className="row">
           <div className="col-xl-6 col-md-6 col-sm-12 p-2">
             <div className="card product-card-back">
@@ -485,16 +487,46 @@ const ProductSingle = props => {
 
                         <div className="col-6">
                           <div className="buy-block text-right">
-                            <button
-                              className="btn btn-raised "
-                              style={{
-                                borderRadius: "30px",
-                                color: "#fff",
-                                background: "#52C41A"
-                              }}
-                            >
-                              Buy Now
-                            </button>
+                            {product.quantity <= 0 ? (
+                              <button
+                                className="btn  btn-warning"
+                                style={{
+                                  borderRadius: "30px",
+                                  color: "#fff",
+                                  background: "#FF470E"
+                                }}
+                              >
+                                Stock Out
+                              </button>
+                            ) : (
+                              <>
+                                {btndisable ? (
+                                  <button
+                                    className="btn btn-raised "
+                                    style={{
+                                      borderRadius: "30px",
+                                      color: "#fff",
+                                      background: "#52C41A"
+                                    }}
+                                    onClick={addToCart}
+                                  >
+                                    Buy Now
+                                  </button>
+                                ) : (
+                                  <button
+                                    className="btn btn-raised "
+                                    disabled
+                                    style={{
+                                      borderRadius: "30px",
+                                      color: "#fff",
+                                      background: "#52C41A"
+                                    }}
+                                  >
+                                    Buy Now
+                                  </button>
+                                )}
+                              </>
+                            )}
                           </div>
                         </div>
                       </div>
@@ -511,7 +543,7 @@ const ProductSingle = props => {
             </div>
           </div>
           <div className="col-xl-6 col-md-6 col-sm-12 p-2">
-            <div className="card description-box pl-2 pr-2">
+            <div className="card description-box pl-2 pr-2 pb-2">
               <Tabs defaultActiveKey="home" id="uncontrolled-tab-example">
                 <Tab eventKey="home" title="Home">
                   <div className="pt-3">

@@ -74,6 +74,13 @@ export const authenticate = (data, next) => {
   }
 };
 
+export const googleauthenticate = (response, next) => {
+  console.log("AUTHENTICATE HELPER ON SIGNIN RESPONSE", response);
+  console.log(response.data.user);
+  localStorage.setItem("jwt", JSON.stringify(response.data));
+  next();
+};
+
 export const signout = next => {
   if (typeof window !== "undefined") {
     localStorage.removeItem("jwt");

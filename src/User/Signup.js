@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { signup } from "../Auth/Index";
 import Spinner from "react-bootstrap/Spinner";
+import GoogleForm from "./GoogleSocialLogin";
+import FacebookForm from "./FacebookSocialLogin";
 import "../index.css";
 
 const Signup = () => {
@@ -138,14 +140,21 @@ const Signup = () => {
                     </Link>
                   </p>
                 </div>
+
+                <div className="pt-2 text-right">
+                  <button
+                    onClick={clickSubmit}
+                    className="btn  btn-raised"
+                    style={{ background: "#f46c45", color: "white" }}
+                  >
+                    Submit
+                  </button>
+                </div>
                 <h5 className="text-center">OR</h5>
                 <div className="social-login">
-                  <button className="btn  btn-info btn-raised btn-block ">
-                    Google
-                  </button>
-                  <button className="btn btn-raised btn-primary btn-block">
-                    Facebook
-                  </button>
+                  <GoogleForm />
+
+                  <FacebookForm />
                 </div>
                 {loading ? (
                   <div className="text-center spinner-bg ">
@@ -156,14 +165,6 @@ const Signup = () => {
                 ) : (
                   ""
                 )}
-              </div>
-              <div className="pt-2 text-right">
-                <button
-                  onClick={clickSubmit}
-                  className="btn btn-success btn-raised"
-                >
-                  Submit
-                </button>
               </div>
             </div>
           </div>

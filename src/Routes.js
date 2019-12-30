@@ -8,6 +8,7 @@ import Home from "./Core/Home";
 import Footer from "./Core/Footer";
 import SingleProduct from "./Core/ProductSingle";
 import UsersProfile from "./User/UsersProfile";
+import CartPage from "./Core/CartPage";
 import MobileMenu from "./Core/MobileMenu";
 import Login from "./User/Login";
 import Signup from "./User/Signup";
@@ -22,6 +23,7 @@ const Routes = () => {
           <Route path="/product/:productId" exact component={SingleProduct} />
           <Route path="/login" exact component={Login} />
           <Route path="/signup" exact component={Signup} />
+          <PrivateRoute path="/cart" exact component={CartPage} />
 
           <PrivateRoute path="/profile" exact component={UsersProfile} />
         </Switch>

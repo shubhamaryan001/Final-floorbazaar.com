@@ -7,6 +7,7 @@ import Slide from "react-reveal/Slide";
 import Trending from "./TrendingSection";
 import Blurb from "./BlurbMain";
 import HomeProduct from "./MainPageProducts";
+
 export default class Home extends Component {
   constructor() {
     super();

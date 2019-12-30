@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { isAuthenticated } from "../Auth/Index";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import moment from "moment";
 import { API } from "../config";
 import { getOrdersHistory } from "./ApiUser";
-import { FaEdit, FaShoppingCart } from "react-icons/fa";
+import { FaEdit, FaShoppingCart, FaSignOutAlt } from "react-icons/fa";
+import { signout } from "../Auth/Index";
 
 import "../index.css";
 const UsersProfile = () => {
   const [order, setOrder] = useState([]);
+  const [RedirectPage, setRedirectPage] = useState(false);
   let {
     user: { _id, name, email, mobile, role, wallet_balance },
     token
@@ -41,6 +43,28 @@ const UsersProfile = () => {
     initOrder(_id, token);
   }, []);
 
+  const RedirectTo = () => {
+    if (RedirectPage) {
+      return <Redirect to="/" />;
+    }
+  };
+
+  const signoutprofile = next => {
+    setRedirectPage(true);
+    console.log(RedirectPage);
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("jwt");
+      next();
+      return fetch(`${API}/signout`, {
+        method: "GET"
+      })
+        .then(response => {
+          console.log("signout", response);
+        })
+        .catch(err => console.log(err));
+    }
+  };
+
   const DefaultImg =
     "https://res.cloudinary.com/djnv06fje/image/upload/v1577008134/dummy-user-img-1_p1kcf2.png";
 
@@ -49,9 +73,10 @@ const UsersProfile = () => {
   return (
     <div className="container-fluid  section-standard-height">
       <div className="container p-2" style={{ minWidth: "80%" }}>
+        {RedirectTo()}
         <div className="row">
           <div className="col-xl-4 col-md-4 col-sm-12 mb-2">
-            <div className="card ">
+            <div className="card  ">
               <div className="card-header p-2">
                 <div className="row">
                   <div className="col-6">
@@ -290,7 +315,30 @@ const UsersProfile = () => {
                   </div>
 
                   <div className="row">
-                    <div className="col-6"></div>
+                    <div className="col-6">
+                      <div className="text-left p-3 font-weight-bold">
+                        <Link
+                          className="btn   btn-sm"
+                          to={`/profile/${_id}`}
+                          style={{
+                            background: "#f46c45",
+                            color: "#fff",
+                            borderRadius: "5px"
+                          }}
+                          onClick={() => signoutprofile(() => {})}
+                        >
+                          <b>
+                            Log Out
+                            <FaSignOutAlt
+                              style={{
+                                margin: "0 0 -1.5px 3px",
+                                fontSize: "15px"
+                              }}
+                            />
+                          </b>
+                        </Link>
+                      </div>
+                    </div>
                     <div className="col-6 ">
                       <div className="text-right p-3 font-weight-bold">
                         <Link

@@ -1,12 +1,14 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap&subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese");
 @import "../node_modules/react-modal-video/css/modal-video.min.css";
-
+@import url("https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap");
 body,
 html {
   margin: 0;
   padding: 0;
   background-color: rgb(243, 243, 243);
-  font-family: "Roboto", sans-serif;
+  /* font-family: "Roboto", sans-serif; */
+  font-family: "Poppins", sans-serif;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -14,7 +16,8 @@ html {
 }
 
 code {
-  font-family: "Roboto", sans-serif;
+  /* font-family: "Roboto", sans-serif; */
+  font-family: "Poppins", sans-serif;
 }
 /* ----------------------------NAVBAR---------------------------------- */
 .navbar {
@@ -845,7 +848,9 @@ section .section-title {
 }
 
 /* ------------------PROFILE PAGE-------------------- */
-
+.parallex {
+  background-attachment: fixed;
+}
 .profile-pic {
   object-fit: cover;
   min-height: 150px;
@@ -855,6 +860,183 @@ section .section-title {
   margin: 0 auto;
 }
 
+/* ------------------------CART PAGE---------------- */
+.coupon-block form {
+  margin: 0 auto;
+  padding: 5px 0 5px 0;
+  text-align: center;
+}
+.coupon-block input {
+  width: 300px;
+  height: 50px;
+  padding: 15px;
+  border: 0;
+  z-index: -100 !important;
+  background: #eeeeee;
+}
+
+.coupon-block .btn {
+  margin-left: -20px;
+  color: #fff;
+  z-index: 200 !important;
+  background: #f46c45;
+  padding: 5px 15px 5px 15px;
+}
+
+.coupon-block input:focus {
+  outline: none;
+}
+
+.note-block {
+  padding: 5px;
+}
+
+.note-block textarea {
+  width: 100%;
+  padding: 10px;
+  border: 0;
+  background: #ececec;
+}
+
+.note-block textarea:focus {
+  outline: none;
+}
+
+.term-block input {
+  margin-right: 5px;
+  padding-top: 5px !important;
+}
+.term-block label {
+  text-align: center;
+  font-size: 16px;
+}
+
+.p-name p {
+  position: absolute;
+  font-size: 18px;
+  font-weight: 400;
+  top: 30%;
+  text-transform: none;
+}
+
+.p-remove .btn {
+  position: absolute;
+  text-transform: none;
+  padding: 5px 8px 5px 8px;
+  left: 10%;
+  top: 30%;
+}
+@media (max-width: 550px) {
+  .term-block label {
+    text-align: center;
+    font-size: 12px !important;
+  }
+  .coupon-block input {
+    width: 250px !important;
+    height: 50px;
+    padding: 15px;
+    border: 0;
+    z-index: -100 !important;
+    background: #eeeeee;
+  }
+
+  .p-name p {
+    font-size: 13px;
+    font-weight: 500;
+    top: 40%;
+    text-transform: none;
+  }
+
+  .p-remove .btn {
+    text-align: right;
+    font-size: 12px !important;
+
+    position: absolute;
+    text-transform: none;
+    padding: 5px 5px 5px 5px;
+    left: 10%;
+    top: 35%;
+  }
+  .cart-tittle {
+    font-size: 25px !important;
+    font-weight: 400;
+  }
+
+  .sub-card .table h6 {
+    font-size: 14px !important;
+    font-weight: 600;
+  }
+  .sub-card .table .second-pay {
+    font-size: 14px !important;
+    font-weight: 500;
+  }
+}
+.sub-card .table h6 {
+  font-size: 16px;
+  font-weight: 600;
+}
+.sub-card .table .second-pay {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.icon-right-thumb {
+  font-size: 18px;
+  margin-bottom: -1.8px;
+  color: #10dc60;
+  animation: mover-1 500ms infinite alternate-reverse;
+}
+
+@media (max-width: 1050px) {
+  .coupon-block input {
+    width: 250px;
+    height: 50px;
+    padding: 15px;
+    border: 0;
+    z-index: -100 !important;
+    background: #eeeeee;
+  }
+
+  .p-name p {
+    font-size: 13px;
+    font-weight: 500;
+    top: 40%;
+    text-transform: none;
+  }
+
+  .p-remove .btn {
+    text-align: right;
+    font-size: 12px !important;
+
+    position: absolute;
+    text-transform: none;
+    padding: 5px 5px 5px 5px;
+    left: 10%;
+    top: 35%;
+  }
+  .cart-tittle {
+    font-size: 30px;
+    font-weight: 400;
+  }
+
+  .sub-card .table h6 {
+    font-size: 14px !important;
+    font-weight: 600;
+  }
+  .sub-card .table .second-pay {
+    font-size: 14px !important;
+    font-weight: 500;
+  }
+}
+
+@keyframes mover-1 {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-10px);
+  }
+}
 /* ----------------COMMON CSS--------------- */
 .section-standard-height {
   background-color: #fff !important;

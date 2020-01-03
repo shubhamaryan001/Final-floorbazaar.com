@@ -862,16 +862,29 @@ section .section-title {
 
 /* ----------------------ORDER DETAIL---------------------- */
 
+.order-p {
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.logo-order {
+  margin-right: 4px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: -4px;
+}
+
 .green-line {
   margin: 5px 10px 5px 20px;
   border-left: 3px solid #11dc61;
-  height: 8vh;
+  height: 6vh;
 }
 
 .red-line {
   margin: 5px 10px 5px 20px;
   border-left: 3px dotted #ffce00;
-  height: 8vh;
+  height: 6vh;
 }
 
 @media (max-width: 550px) {

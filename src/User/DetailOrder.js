@@ -38,6 +38,12 @@ const DetailOrder = props => {
         <div className="row">
           <div className="col-xl-4 col-md-4 col-sm-12">
             <div className="card">
+              <h5
+                className="card-header text-center p-2"
+                style={{ background: "#ececec" }}
+              >
+                Live Order Status
+              </h5>
               <div className="track-block">
                 {order.placed_order ? (
                   <>
@@ -46,16 +52,8 @@ const DetailOrder = props => {
                         className="card-header p-1"
                         style={{ background: "#11dc61", color: "#fff" }}
                       >
-                        <p className="badge badge-pill mb-0" style={{}}>
-                          <FaRegCheckCircle
-                            style={{
-                              marginRight: "2px",
-                              color: "#fff",
-                              fontSize: "16px",
-                              fontWeight: "700",
-                              marginBottom: "-4px"
-                            }}
-                          />
+                        <p className="order-p mb-0">
+                          <FaRegCheckCircle className="logo-order" />
                           Project Has Been Confirmed
                         </p>
                       </div>
@@ -78,16 +76,8 @@ const DetailOrder = props => {
                         className="card-header p-1"
                         style={{ background: "#ffce00", color: "#fff" }}
                       >
-                        <p className="badge  mb-0" style={{}}>
-                          <FaClock
-                            style={{
-                              marginRight: "4px",
-                              color: "#fff",
-                              fontSize: "16px",
-                              fontWeight: "700",
-                              marginBottom: "-5px"
-                            }}
-                          />
+                        <p className="order-p mb-0">
+                          <FaClock className="logo-order" />
                           Project Not Yet Confirmed
                         </p>
                       </div>
@@ -112,16 +102,8 @@ const DetailOrder = props => {
                         className="card-header p-1"
                         style={{ background: "#11dc61", color: "#fff" }}
                       >
-                        <p className="badge badge-pill mb-0" style={{}}>
-                          <FaRegCheckCircle
-                            style={{
-                              marginRight: "2px",
-                              color: "#fff",
-                              fontSize: "16px",
-                              fontWeight: "700",
-                              marginBottom: "-4px"
-                            }}
-                          />
+                        <p className="order-p mb-0">
+                          <FaRegCheckCircle className="logo-order" />
                           Your Project is now Processing
                         </p>
                       </div>
@@ -173,17 +155,40 @@ const DetailOrder = props => {
                         className="card-header p-1"
                         style={{ background: "#ffce00", color: "#fff" }}
                       >
-                        <p className="badge  mb-0" style={{}}>
-                          <FaClock
-                            style={{
-                              marginRight: "4px",
-                              color: "#fff",
-                              fontSize: "16px",
-                              fontWeight: "700",
-                              marginBottom: "-5px"
-                            }}
-                          />
+                        <p className="order-p  mb-0">
+                          <FaClock className="logo-order" />
                           Project Not Yet Processed
+                        </p>
+                      </div>
+
+                      <span>
+                        <>
+                          <div
+                            className="p-1 text-muted"
+                            style={{ fontSize: "12px" }}
+                          >
+                            <span>Engineer not yet Assigned</span>
+                          </div>
+                        </>
+                      </span>
+                    </div>
+
+                    <div className="red-line"></div>
+                  </>
+                )}
+
+                {/* ----------------------------------------------------------------------------------------------- */}
+
+                {order.underconstruction ? (
+                  <>
+                    <div className="card m-2">
+                      <div
+                        className="card-header p-1"
+                        style={{ background: "#11dc61", color: "#fff" }}
+                      >
+                        <p className="order-p mb-0">
+                          <FaRegCheckCircle className="logo-order" />
+                          Engineer Start Working On Your Project
                         </p>
                       </div>
                       <div
@@ -191,15 +196,35 @@ const DetailOrder = props => {
                         style={{ fontSize: "12px" }}
                       >
                         <span>
-                          {order.assignedName === null ||
-                          order.assignedName === undefined ||
-                          order.assignedName === "" ? (
-                            <>
-                              <b> Engineer not yet Assigned </b>
-                            </>
-                          ) : (
-                            ""
-                          )}
+                          <p className="mb-0">
+                            First phase of the project is started. We will next
+                            Update after Floor Plan Ready.
+                          </p>
+                        </span>
+                      </div>
+                    </div>
+                    <div className="green-line"></div>
+                  </>
+                ) : (
+                  <>
+                    <div className="card m-2">
+                      <div
+                        className="card-header p-1"
+                        style={{ background: "#ffce00", color: "#fff" }}
+                      >
+                        <p className=" order-p mb-0">
+                          <FaClock className="logo-order" />
+                          Engineer Not Yet Started Working On Your Project
+                        </p>
+                      </div>
+                      <div
+                        className="p-1 text-muted"
+                        style={{ fontSize: "12px" }}
+                      >
+                        <span>
+                          <p className="mb-0">
+                            Yet to start first phase of the project.
+                          </p>
                         </span>
                       </div>
                     </div>
@@ -208,6 +233,124 @@ const DetailOrder = props => {
                 )}
 
                 {/* ----------------------------------------------------------------------------------------------- */}
+
+                {order.ready ? (
+                  <>
+                    <div className="card m-2">
+                      <div
+                        className="card-header p-1"
+                        style={{ background: "#11dc61", color: "#fff" }}
+                      >
+                        <p className="order-p mb-0">
+                          <FaRegCheckCircle className="logo-order" />
+                          Floor Plan is Ready Now
+                        </p>
+                      </div>
+                      <div
+                        className="p-1 text-muted"
+                        style={{ fontSize: "12px" }}
+                      >
+                        <span>
+                          <p className="mb-0">
+                            Please clear the
+                            <b>
+                              {" "}
+                              remaining balance (₹
+                              {order.secondpaymentamount}){" "}
+                            </b>
+                            to start second phase of project. In which all other
+                            plans and documents will be provided with complete
+                            project file. After paying second payment
+                            automatically the file will unlock to download.
+                          </p>
+                        </span>
+                      </div>
+                    </div>
+                    <div className="green-line"></div>
+                  </>
+                ) : (
+                  <>
+                    <div className="card m-2">
+                      <div
+                        className="card-header p-1"
+                        style={{ background: "#ffce00", color: "#fff" }}
+                      >
+                        <p className=" order-p mb-0">
+                          <FaClock className="logo-order" />
+                          Floor Plan Is Not Ready Yet
+                        </p>
+                      </div>
+                      <div
+                        className="p-1 text-muted"
+                        style={{ fontSize: "12px" }}
+                      >
+                        <span>
+                          <p className="mb-0">
+                            Yet to start second phase of project. Wait for the
+                            update from Engineer.
+                          </p>
+                        </span>
+                      </div>
+                    </div>
+                    <div className="red-line"></div>
+                  </>
+                )}
+
+                {/* ----------------------------------------------------------------------------------------------- */}
+
+                {order.finished ? (
+                  <>
+                    <div className="card m-2">
+                      <div
+                        className="card-header p-1"
+                        style={{ background: "#11dc61", color: "#fff" }}
+                      >
+                        <p className="order-p mb-0">
+                          <FaRegCheckCircle className="logo-order" />
+                          Complete Project Is Finished
+                        </p>
+                      </div>
+                      <div
+                        className="p-1 text-muted"
+                        style={{ fontSize: "12px" }}
+                      >
+                        <span>
+                          <p className="mb-0">
+                            Complete project file is finished and the file link
+                            is updated to latest version of your plans and
+                            documents.You can go and download latest files.
+                          </p>
+                        </span>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    {" "}
+                    <div className="card m-2">
+                      <div
+                        className="card-header p-1"
+                        style={{ background: "#ffce00", color: "#fff" }}
+                      >
+                        <p className=" order-p mb-0">
+                          <FaClock className="logo-order" />
+                          Project Is Not Yet Finished
+                        </p>
+                      </div>
+                      <div
+                        className="p-1 text-muted"
+                        style={{ fontSize: "12px" }}
+                      >
+                        <span>
+                          <p className="mb-0">
+                            Yet to upload latest files and plan according to
+                            your choices.
+                          </p>
+                        </span>
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>

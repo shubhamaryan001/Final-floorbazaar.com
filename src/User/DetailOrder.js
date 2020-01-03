@@ -39,10 +39,16 @@ const DetailOrder = props => {
           <div className="col-xl-4 col-md-4 col-sm-12">
             <div className="card">
               <h5
-                className="card-header text-center p-2"
+                className="card-header text-left p-2"
                 style={{ background: "#ececec" }}
               >
                 Live Order Status
+                <span
+                  className="text-muted"
+                  style={{ fontSize: "10px", paddingLeft: "5px" }}
+                >
+                  (Updated {moment(order.updatedAt).fromNow()})
+                </span>
               </h5>
               <div className="track-block">
                 {order.placed_order ? (

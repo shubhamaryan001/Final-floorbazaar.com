@@ -2,7 +2,7 @@ import { processPayment } from "./ApiCore";
 import { createOrder } from "./ApiCore";
 import { emptyCart } from "./CartHelper";
 import { isAuthenticated } from "../Auth/Index";
-
+import { url } from "./CartPage";
 export const razorPayOptionsDirt = (
   amount,
   user,
@@ -18,8 +18,8 @@ export const razorPayOptionsDirt = (
     key: "rzp_test_xHFa7oLm0s4xHO",
     amount: amount ? amount * 100 : 50000, // 50000 refers to 50000 paise or INR 500.
     currency: "INR",
-    name: "E-comm",
-    description: "An e-commerce for developers",
+    name: "FloorPlanBazaar.com",
+    description: "FloorPlanBazaar.com",
     image:
       "https://res.cloudinary.com/djnv06fje/image/upload/v1574864028/1_bsry6v.png",
     // order_id: 'order_9A33XWu170gUtm',
@@ -48,10 +48,10 @@ export const razorPayOptionsDirt = (
           secondpaymentamount: SecondAmount
         };
 
-        console.log(transactionId);
         createOrder(userId, token, createOrderData)
           .then(orderResponse => {
             emptyCart(() => {});
+            window.location = `${url[0]}successfull/order`;
           })
 
           .catch(error => {

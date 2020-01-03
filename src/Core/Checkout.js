@@ -159,13 +159,17 @@ const Checkout = ({ products }) => {
         <div>
           <button
             onClick={walletDeduct}
-            className="btn btn-raised btn-success"
-            style={{ color: "#FBA211" }}
+            className="btn btn-sm btn-raised btn-success"
+            style={{
+              background: "#FBA211",
+              color: "white",
+              textAlign: "center"
+            }}
           >
             Pay using Wallet Money
           </button>
           <br />
-          <span className="text-center">
+          <span className="text-left">
             <p>
               Wallet balance
               <span className="ml-1">
@@ -182,14 +186,18 @@ const Checkout = ({ products }) => {
         <div>
           <button
             onClick={walletDeduct}
-            className="btn btn-raised btn-success"
+            className="btn btn-sm btn-raised btn-success"
             disabled
-            style={{ color: "#FBA211" }}
+            style={{
+              background: "#FBA211",
+              color: "white",
+              textAlign: "center"
+            }}
           >
             Pay using Wallet Money
           </button>
           <br />
-          <span className="text-center">
+          <span className="text-left">
             <p>
               Wallet balance
               <span className="ml-1">
@@ -356,7 +364,9 @@ const Checkout = ({ products }) => {
                         </h5>
                       </td>
                       <td>
-                        <h6>₹ {SecondAmount}</h6>
+                        <h6 className="second-pay text-muted">
+                          ₹ {SecondAmount}
+                        </h6>
                       </td>
                     </tr>
                     {applied ? (
@@ -377,6 +387,16 @@ const Checkout = ({ products }) => {
                     )}
                   </tbody>
                 </table>
+
+                <div className="note-block">
+                  <textarea
+                    rows="3"
+                    onChange={handleNote}
+                    className="form-control-checkout"
+                    value={data.note}
+                    placeholder="Type any Note ......"
+                  />
+                </div>
 
                 <div className="coupon-block">
                   <div className="text-center">
@@ -407,16 +427,6 @@ const Checkout = ({ products }) => {
                       Apply
                     </button>
                   </form>
-                </div>
-
-                <div className="note-block">
-                  <textarea
-                    rows="3"
-                    onChange={handleNote}
-                    className="form-control-checkout"
-                    value={data.note}
-                    placeholder="Type any Note ......"
-                  />
                 </div>
                 <div className="term-block">
                   <label>

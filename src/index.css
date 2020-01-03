@@ -860,7 +860,88 @@ section .section-title {
   margin: 0 auto;
 }
 
+/* ----------------------ORDER DETAIL---------------------- */
+
+.green-line {
+  margin: 5px 10px 5px 20px;
+  border-left: 3px solid #11dc61;
+  height: 8vh;
+}
+
+.red-line {
+  margin: 5px 10px 5px 20px;
+  border-left: 3px dotted #ffce00;
+  height: 8vh;
+}
+
+@media (max-width: 550px) {
+  .green-line {
+    height: 5vh;
+  }
+
+  .red-line {
+    height: 5vh;
+  }
+}
+/* --------------------SUCCESSFUL PAGE------------------- */
+
+.background-celb {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: url("https://res.cloudinary.com/djnv06fje/image/upload/v1578069780/pngfuel.com_j4j7kp.png");
+  text-align: center;
+  min-width: 50%;
+  min-height: 20vh;
+  z-index: -120;
+
+  animation: celb 8s;
+  animation-delay: 2s;
+}
+
+.successful-page-height {
+  padding: 8rem 0 5rem 0;
+  min-height: 70vh;
+  background-color: #fff;
+}
+
+@keyframes celb {
+  0% {
+    z-index: 120;
+    top: 450px;
+  }
+  100% {
+    z-index: 120;
+    top: -150px;
+  }
+}
+
+@media (max-width: 550px) {
+  .successful-page-height {
+    padding: 5rem 0 5rem 0;
+    min-height: 70vh;
+    background-color: #fff;
+  }
+}
 /* ------------------------CART PAGE---------------- */
+
+.cart-block-card {
+  min-height: 50vh;
+  background-image: url("https://res.cloudinary.com/djnv06fje/image/upload/v1578055020/cart_axj8vw.png");
+  filter: blur(4px);
+  -webkit-filter: blur(4px);
+}
+
+.route-btn {
+  position: absolute;
+
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .coupon-block form {
   margin: 0 auto;
   padding: 5px 0 5px 0;

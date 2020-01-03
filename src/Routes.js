@@ -6,6 +6,8 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Menu from "./Core/Menu";
 import Home from "./Core/Home";
 import Footer from "./Core/Footer";
+import Successfull from "./Core/SuccessfullOrder";
+import DetailOrder from "./User/DetailOrder";
 import SingleProduct from "./Core/ProductSingle";
 import UsersProfile from "./User/UsersProfile";
 import CartPage from "./Core/CartPage";
@@ -23,8 +25,13 @@ const Routes = () => {
           <Route path="/product/:productId" exact component={SingleProduct} />
           <Route path="/login" exact component={Login} />
           <Route path="/signup" exact component={Signup} />
-          <PrivateRoute path="/cart" exact component={CartPage} />
-
+          <Route path="/cart" exact component={CartPage} />
+          <PrivateRoute
+            path="/successfull/order"
+            exact
+            component={Successfull}
+          />
+          <PrivateRoute path="/order/:orderId" exact component={DetailOrder} />
           <PrivateRoute path="/profile" exact component={UsersProfile} />
         </Switch>
       </ScrollToTop>

@@ -78,8 +78,8 @@ const Menu = ({ history }) => (
                 title={isAuthenticated().user.name}
                 id="basic-nav-dropdown"
               >
-                <NavDropdown.Item href="#action/3.1">Orders</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Profile</NavDropdown.Item>
+                <NavDropdown.Item href="/profile">Orders</NavDropdown.Item>
+                <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
 
                 <NavDropdown.Divider />
                 <NavDropdown.Item

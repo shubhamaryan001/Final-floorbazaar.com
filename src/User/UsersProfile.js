@@ -215,7 +215,7 @@ const UsersProfile = () => {
                   />
                 </div>
 
-                <div className="details-block">
+                <div className="details-block p-3">
                   <div className="row pt-3">
                     <div className="col-6">
                       <div className="pl-1 ">

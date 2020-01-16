@@ -14,6 +14,10 @@ import CartPage from "./Core/CartPage";
 import MobileMenu from "./Core/MobileMenu";
 import Login from "./User/Login";
 import Signup from "./User/Signup";
+import Chat from "./User/Support";
+import UserChat from "./User/UserSupport";
+import SingleChat from "./User/SingleSupport";
+import UpdateUser from "./User/UpdateProfile";
 const Routes = () => {
   return (
     <BrowserRouter>
@@ -26,6 +30,14 @@ const Routes = () => {
           <Route path="/login" exact component={Login} />
           <Route path="/signup" exact component={Signup} />
           <Route path="/cart" exact component={CartPage} />
+          <Route path="/chat" exact component={Chat} />
+          <PrivateRoute path="/user-chat" exact component={UserChat} />
+          <PrivateRoute path="/chat/:name/:id" exact component={SingleChat} />
+          <PrivateRoute
+            path="/update-profile/:userId"
+            exact
+            component={UpdateUser}
+          />
           <PrivateRoute
             path="/successfull/order"
             exact

@@ -701,11 +701,10 @@ const DetailOrder = props => {
                 </div>
                 <div className="col-6">
                   <div className="chat-support text-right">
-                    <a
+                    <Link
                       className="btn btn-sm btn-light btn-raised text-right mb-0"
                       style={{ color: "#000", borderRadius: "30px" }}
-                      target="_blank"
-                      href="https://floorplan-support.now.sh/"
+                      to="/chat"
                     >
                       <MdChat
                         style={{
@@ -715,7 +714,7 @@ const DetailOrder = props => {
                         }}
                       />
                       Chat Support
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

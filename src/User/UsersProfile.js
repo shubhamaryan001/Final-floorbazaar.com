@@ -6,7 +6,8 @@ import { API } from "../config";
 import { getOrdersHistory } from "./ApiUser";
 import { FaEdit, FaShoppingCart, FaSignOutAlt } from "react-icons/fa";
 import { signout } from "../Auth/Index";
-
+import Dropdown from "react-bootstrap/Dropdown";
+import Noti from "../User/Notifcation";
 import "../index.css";
 const UsersProfile = () => {
   const [order, setOrder] = useState([]);
@@ -203,7 +204,16 @@ const UsersProfile = () => {
           </div>
           <div className="col-xl-4 col-md-4 col-sm-12 ">
             <div className="card">
-              <h5 className="card-header text-center"> {name}'s Information</h5>
+              <div className="card-header text-center p-1">
+                <div className="float-left">
+                  <h6 className="pt-2">{name}'s Information</h6>
+                </div>
+                <div className="float-right">
+                  <h6 className="pt-2">
+                    <Noti />
+                  </h6>
+                </div>
+              </div>
 
               <div className="card-content">
                 <div className="p-3 text-center " style={{ margin: "0 auto" }}>
@@ -343,7 +353,7 @@ const UsersProfile = () => {
                       <div className="text-right p-3 font-weight-bold">
                         <Link
                           className="btn   btn-sm"
-                          to={`/profile/${_id}`}
+                          to={`/update-profile/${_id}`}
                           style={{
                             background: "#f1c40f",
                             color: "#fff",

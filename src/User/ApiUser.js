@@ -118,3 +118,140 @@ export const updateSecondPayment = (userId, token, orderId, secondpayment) => {
     })
     .catch(err => console.log(err));
 };
+
+export const GetUser = (token, userId) => {
+  return fetch(`${API}/user/${userId}`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    }
+  })
+    .then(response => {
+      return response.json();
+    })
+    .catch(err => console.log(err));
+};
+
+export const GetAllUsers = token => {
+  return fetch(`${API}/users`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    }
+  })
+    .then(response => {
+      return response.json();
+    })
+    .catch(err => console.log(err));
+};
+
+export const GetAllAdmin = token => {
+  return fetch(`${API}/adminusers`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    }
+  })
+    .then(response => {
+      return response.json();
+    })
+    .catch(err => console.log(err));
+};
+
+export const GetUserByName = (token, name) => {
+  return fetch(`${API}/byName/${name}`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    }
+  })
+    .then(response => {
+      return response.json();
+    })
+    .catch(err => console.log(err));
+};
+
+export const GetAllMessages = (token, senderId, receiverId) => {
+  return fetch(`${API}/chat-messages/${senderId}/${receiverId}`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    }
+  })
+    .then(response => {
+      return response.json();
+    })
+    .catch(err => console.log(err));
+};
+
+export const SendMessage = (
+  token,
+  senderId,
+  senderName,
+  receiverId,
+  receiverName,
+  message
+) => {
+  return fetch(`${API}/chat-messages/${senderId}/${receiverId}`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify({
+      token,
+      senderId,
+      senderName,
+      receiverId,
+      receiverName,
+      message
+    })
+  })
+    .then(response => {
+      return response.json();
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+
+export const MarkReceiverMsg = (token, senderName, receiverName) => {
+  return fetch(`${API}/receiver-messages/${senderName}/${receiverName}`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    }
+  })
+    .then(response => {
+      return response.json();
+    })
+    .catch(err => console.log(err));
+};
+
+export const MarkAllMsg = (token, Name) => {
+  return fetch(`${API}/mark-all-messages/${Name}`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    }
+  })
+    .then(response => {
+      return response.json();
+    })
+    .catch(err => console.log(err));
+};

@@ -792,6 +792,16 @@ const DetailOrder = props => {
                   </p>
                 </div>
               </div>
+
+              <div className="row">
+                <div className="col-6">
+                  <p>Order note by you:</p>
+                </div>
+                <div className="col-6">
+                  <p className="text-muted">{order.note}</p>
+                </div>
+              </div>
+
               <div className="row mt-4">
                 <div className="col-12">
                   {product.map((p, i) => (

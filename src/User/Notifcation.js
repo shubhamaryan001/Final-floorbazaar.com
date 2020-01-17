@@ -105,11 +105,11 @@ class Notifcation extends Component {
           <Dropdown.Menu>
             {ChatList.length > 0 ? (
               <>
-                {" "}
                 <div
+                  className="container"
                   style={{
                     maxHeight: "20vh",
-                    minHeight: "20vh",
+
                     overflowY: "scroll"
                   }}
                 >
@@ -148,7 +148,10 @@ class Notifcation extends Component {
                                         m.receiverId._id
                                       )
                                     }
-                                    style={{ color: "#000" }}
+                                    style={{
+                                      color: "#000",
+                                      overflowWrap: "break-word"
+                                    }}
                                   >
                                     {
                                       m.msgId.message[
@@ -163,7 +166,7 @@ class Notifcation extends Component {
                                       {moment(
                                         m.msgId.message[
                                           m.msgId.message.length - 1
-                                        ].createdAt
+                                        ].sendAt
                                       ).fromNow()}
                                     </span>
                                   </button>

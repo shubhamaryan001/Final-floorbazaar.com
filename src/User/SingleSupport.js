@@ -8,24 +8,21 @@ import {
   GetAllAdmin
 } from "./ApiUser";
 import { API, SOCKETAPI } from "../config";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { MdChat } from "react-icons/md";
+import { IoMdSend } from "react-icons/io";
+
 import Spinner from "react-bootstrap/Spinner";
 import "../index.css";
 import io from "socket.io-client";
 import Noti from "./Notifcation";
-import * as Scroll from "react-scroll";
-import {
-  Element,
-  Events,
-  animateScroll as scroll,
-  scrollSpy,
-  scroller
-} from "react-scroll";
+
 import { GoPrimitiveDot } from "react-icons/go";
+import { FaUsers } from "react-icons/fa";
 
 import ScrollableFeed from "react-scrollable-feed";
 import _ from "lodash";
+import moment from "moment";
 
 const isActive = (history, path) => {
   if (history.location.pathname === path) {
@@ -49,14 +46,14 @@ export default class SingleSupport extends Component {
       MessagesList: [],
       Online: [],
       isOnline: false,
-      AllOnline: false
+      AllOnline: false,
+      typing: false
     };
   }
 
   socket = io(SOCKETAPI);
   senderPostName = isAuthenticated().user.name;
   senderPostId = isAuthenticated().user._id;
-
   GetUser = () => {
     const { user, token } = isAuthenticated();
 
@@ -87,7 +84,7 @@ export default class SingleSupport extends Component {
 
           setTimeout(() => {
             this.setState({ loading: false });
-          }, 2000);
+          }, 1000);
         }
       });
     }
@@ -110,7 +107,7 @@ export default class SingleSupport extends Component {
         this.socket.on("refreshPage", () => {
           GetAllMessages(token, senderId, Id).then(data => {
             this.setState({ MessagesList: data.messages.message });
-            console.log(this.state.MessagesList);
+            console.log(data.messages.message);
           });
         });
       }
@@ -123,7 +120,7 @@ export default class SingleSupport extends Component {
 
     GetAllMessages(token, senderId, Id).then(data => {
       this.setState({ MessagesList: data.messages.message });
-      console.log(this.state.MessagesList);
+      console.log(data.messages.message);
     });
   };
 
@@ -160,22 +157,19 @@ export default class SingleSupport extends Component {
   };
 
   CheckOnline = name => {
-    const { Online, isOnline } = this.state;
+    const { Online } = this.state;
     if (Online.length > 0) {
       const result = Online.findIndex(element => element === name);
       if (result > -1) {
-        console.log("true");
         this.setState({ isOnline: true });
       } else {
-        console.log("false");
         this.setState({ isOnline: false });
       }
-      console.log(isOnline, Online);
     }
   };
 
   CheckAllinOne = UserName => {
-    const { Online, AllOnline } = this.state;
+    const { Online } = this.state;
     const result = _.indexOf(Online, UserName);
     if (result > -1) {
       return true;
@@ -184,10 +178,28 @@ export default class SingleSupport extends Component {
     }
   };
 
+  IsTyping = () => {
+    const { user } = isAuthenticated();
+    this.socket.emit("start_typing", {
+      sender: user.name,
+      receiver: this.state.receiver.name
+    });
+
+    if (this.typingMessage) {
+      clearTimeout(this.typingMessage);
+    }
+
+    this.typingMessage = setTimeout(() => {
+      this.socket.emit("stop_typing", {
+        sender: user.name,
+        receiver: this.state.receiver.name
+      });
+    }, 1000);
+  };
+
   componentDidMount() {
     const name = this.props.match.params.name;
     const Id = this.props.match.params.id;
-    console.log(this.props.match.params);
     this.GetUser();
     this.SingleNameUser(name, Id);
     this.GetMessages(Id);
@@ -209,6 +221,18 @@ export default class SingleSupport extends Component {
       this.setState({ Online: data });
       this.CheckOnline(name);
     });
+
+    this.socket.on("is_typing", data => {
+      if (data.sender === this.state.receiver.name) {
+        this.setState({ typing: true });
+      }
+    });
+
+    this.socket.on("has_stopped_typing", data => {
+      if (data.sender === this.state.receiver.name) {
+        this.setState({ typing: false });
+      }
+    });
   }
 
   render() {
@@ -221,133 +245,78 @@ export default class SingleSupport extends Component {
       receiver,
       message,
       MessagesList,
-      isOnline
+      isOnline,
+      typing
     } = this.state;
     const DefaultImg =
       "https://res.cloudinary.com/djnv06fje/image/upload/v1577008134/dummy-user-img-1_p1kcf2.png";
     return (
-      <div className="container-fluid section-standard-height">
+      <div className="container-fluid section-standard-height-chat">
         <div style={{ display: "none" }}>
           <Noti />
         </div>
+        <div className="alert-danger">{error ? { error } : ""}</div>
 
-        <div className="container card p-2" style={{ minWidth: "70%" }}>
-          <div className="badge badge-danger">{error ? <>{error}</> : ""}</div>
+        <div className="container">
           <div className="row">
-            <div className="col-md-4">
-              <div className="left-bar">
-                {loading ? (
-                  <div className="text-center loading-screen">
-                    <div className="spinner-position">
-                      <Spinner animation="border" variant="warning" />
-                    </div>
-                  </div>
-                ) : (
-                  ""
-                )}
-
-                {users.map((user, i) => {
-                  return (
-                    <div key={i}>
-                      <div className="row">
-                        <div className="col-12">
-                          <div className="users">
-                            <Link
-                              style={isActive(
-                                history,
-                                `/chat/${user.name}/${user._id}`
-                              )}
-                              to={`/chat/${user.name}/${user._id}`}
-                              onClick={() => window.location.reload()}
-                              className="dropdown-item"
-                            >
-                              <div className="row">
-                                <div className="col-4">
-                                  <div className="user-img">
-                                    <img
-                                      key={i}
-                                      src={`${API}/user/photo/${user._id}`}
-                                      alt={user.name}
-                                      onError={i =>
-                                        (i.target.src = `${DefaultImg}`)
-                                      }
-                                      className="rounded-circle"
-                                      style={{
-                                        height: "50px",
-                                        width: "50px",
-                                        minHeight: "50px",
-                                        minWidth: "50px",
-                                        objectFit: "cover"
-                                      }}
-                                    />
-                                  </div>
-                                </div>
-                                <div className="col-4">
-                                  <div className="user-name">
-                                    <p>{user.name}</p>
-                                  </div>
-                                </div>
-                                <div className="col-4">
-                                  <div className="user-chat">
-                                    <Link
-                                      style={isActive(
-                                        history,
-                                        `/chat/${user.name}/${user._id}`
-                                      )}
-                                      to={`/chat/${user.name}/${user._id}`}
-                                      className="btn btn-sm "
-                                      onClick={() => window.location.reload()}
-                                    >
-                                      <MdChat
-                                        style={{
-                                          fontSize: "20px",
-                                          marginBottom: "-4px",
-                                          marginRight: "3px"
-                                        }}
-                                      />
-                                      {this.CheckAllinOne(user.name) ? (
-                                        <>
-                                          <GoPrimitiveDot
-                                            style={{
-                                              color: "green",
-                                              fontSize: "18px"
-                                            }}
-                                          />
-                                        </>
-                                      ) : (
-                                        <>
-                                          <GoPrimitiveDot
-                                            style={{
-                                              color: "red",
-                                              fontSize: "18px"
-                                            }}
-                                          />
-                                        </>
-                                      )}
-                                    </Link>
-                                  </div>
-                                </div>
-                              </div>
-                            </Link>
-                          </div>
-                        </div>
+            <div className="col-lg-4 col-md-4 col-sm-12">
+              <div
+                className="container card p-2"
+                style={{
+                  minHeight: "50vh",
+                  maxHeight: "50vh",
+                  overflowY: "scroll",
+                  overflowX: "hidden"
+                }}
+              >
+                <div className="left-bar">
+                  {loading ? (
+                    <div className="text-center loading-screen">
+                      <div className="spinner-position">
+                        <Spinner animation="border" variant="warning" />
                       </div>
+                    </div>
+                  ) : (
+                    ""
+                  )}
 
-                      {/* <ul className="list-item" style={{ listStyle: "none" }}>
-                        <li>
-                          <div className="row">
-                            <div className="col-12 p-1">
-                              <div className="user-name text-left">
-                                <a
-                                  style={isActive(
-                                    history,
-                                    `/chat/${user.name}/${user._id}`
-                                  )}
-                                  href={`/chat/${user.name}/${user._id}`}
-                                  className="btn btn-sm "
-                                >
-                                  <ul class="list-inline ">
-                                    <li class="list-inline-item">
+                  <div className="heading">
+                    <h5 className="text-center m-1">
+                      {user.role === 0 ? (
+                        <>
+                          Available support team{" "}
+                          <MdChat
+                            style={{ fontSize: "20px", marginBottom: "-3px" }}
+                          />
+                        </>
+                      ) : (
+                        <>
+                          All users{" "}
+                          <FaUsers
+                            style={{ fontSize: "20px", marginBottom: "-3px" }}
+                          />
+                        </>
+                      )}
+                    </h5>
+                  </div>
+                  {users.map((user, i) => {
+                    return (
+                      <div key={i}>
+                        <div className="row">
+                          <div className="col-12">
+                            <div className="users">
+                              <Link
+                                style={isActive(
+                                  history,
+                                  `/chat/${user.name}/${user._id}`
+                                )}
+                                to={`/chat/${user.name}/${user._id}`}
+                                onClick={() => window.location.reload()}
+                                className="dropdown-item"
+                              >
+                                <div className="row">
+                                  <div className="col-4">
+                                    <div className="user-img">
                                       <img
                                         key={i}
                                         src={`${API}/user/photo/${user._id}`}
@@ -364,38 +333,37 @@ export default class SingleSupport extends Component {
                                           objectFit: "cover"
                                         }}
                                       />
-                                    </li>
-                                    <li className="list-inline-item">
-                                      <div>
-                                        <p>{user.name}</p>
-                                      </div>
-                                    </li>
-                                    <li className="list-inline-item">
-                                      <p className="mb-0">
-                                        <a
-                                          style={isActive(
-                                            history,
-                                            `/chat/${user.name}/${user._id}`
-                                          )}
-                                          href={`/chat/${user.name}/${user._id}`}
-                                          className="btn btn-sm "
-                                        >
-                                          <MdChat
-                                            style={{
-                                              fontSize: "20px",
-                                              marginBottom: "-4px",
-                                              marginRight: "3px"
-                                            }}
-                                          />
-                                        </a>
-                                      </p>
-                                      <p>
+                                    </div>
+                                  </div>
+                                  <div className="col-4">
+                                    <div className="user-name">
+                                      <p>{user.name}</p>
+                                    </div>
+                                  </div>
+                                  <div className="col-4">
+                                    <div className="user-chat">
+                                      <Link
+                                        style={isActive(
+                                          history,
+                                          `/chat/${user.name}/${user._id}`
+                                        )}
+                                        to={`/chat/${user.name}/${user._id}`}
+                                        className="btn btn-sm "
+                                        onClick={() => window.location.reload()}
+                                      >
+                                        <MdChat
+                                          style={{
+                                            fontSize: "20px",
+                                            marginBottom: "-4px",
+                                            marginRight: "3px"
+                                          }}
+                                        />
                                         {this.CheckAllinOne(user.name) ? (
                                           <>
                                             <GoPrimitiveDot
                                               style={{
                                                 color: "green",
-                                                fontSize: "2rem"
+                                                fontSize: "18px"
                                               }}
                                             />
                                           </>
@@ -404,131 +372,201 @@ export default class SingleSupport extends Component {
                                             <GoPrimitiveDot
                                               style={{
                                                 color: "red",
-                                                fontSize: "2rem"
+                                                fontSize: "18px"
                                               }}
                                             />
                                           </>
                                         )}
-                                      </p>
-                                    </li>
-                                  </ul>
-                                </a>
-                              </div>
+                                      </Link>
+                                    </div>
+                                  </div>
+                                </div>
+                              </Link>
                             </div>
                           </div>
-                        </li>
-                      </ul> */}
-                    </div>
-                  );
-                })}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
-
-            <div className="col-md-8">
+            <div className="col-lg-8 col-md-8 col-sm-12">
               <div
-                className="chat-block p-3"
-                style={{ background: "#ebebeb", minHeight: "50vh" }}
+                className="container-fluid right-bar p-2"
+                style={{
+                  minHeight: "50vh",
+                  maxHeight: "60vh"
+                }}
               >
-                <div className="card ">
-                  <div className="card-header pl-3 pr-3 pt-1 pb-1">
+                <div className="chat-box">
+                  <div className="chat-header ">
                     <div className="row">
-                      <div className="col-6">
-                        <div className="row">
-                          <div
-                            className="col-6 pr-1"
-                            style={{ maxWidth: "20%" }}
-                          >
-                            <div className="user-img text-right">
+                      <div className="col-8">
+                        <div className="user-img">
+                          <ul class="list-unstyled">
+                            <li class="media">
                               <img
                                 src={`${API}/user/photo/${receiver._id}`}
                                 alt={receiver.name}
                                 onError={i => (i.target.src = `${DefaultImg}`)}
-                                className="rounded-circle"
+                                className="rounded-circle mr-3"
                                 style={{
                                   height: "50px",
                                   width: "50px",
                                   minHeight: "50px",
                                   minWidth: "50px",
-                                  objectFit: "cover"
+                                  objectFit: "cover",
+                                  margin: "0 auto"
                                 }}
                               />
-                            </div>
-                          </div>
-                          <div className="col-6">
-                            <div className="user-name text-left">
-                              <p
-                                className="mb-0"
-                                style={{
-                                  fontWeight: "500",
-                                  fontSize: "20px"
-                                }}
-                              >
-                                {receiver.name}
-                              </p>
-                              <span>
-                                <p className="mb-0">
+                              <div class="media-body">
+                                <h5 class="mt-0 mb-1">{receiver.name}</h5>
+                                <span style={{ fontSize: "12px" }}>
                                   {isOnline === true ? (
                                     <>Online</>
                                   ) : (
                                     <>Offline</>
                                   )}
-                                </p>
-                              </span>
-                            </div>
-                          </div>
+                                  {typing ? (
+                                    <>
+                                      <span
+                                        style={{
+                                          marginLeft: "3px",
+                                          color: "#11dc61"
+                                        }}
+                                      >
+                                        {receiver.name} isTyping
+                                      </span>
+                                    </>
+                                  ) : (
+                                    ""
+                                  )}
+                                </span>
+                              </div>
+                            </li>
+                          </ul>
                         </div>
                       </div>
-                      <div className="col-6"></div>
+                      <div className="col-4">
+                        <div className="user-name"></div>
+                      </div>
                     </div>
                   </div>
 
-                  <div className="message-screen ">
-                    <ScrollableFeed id="containerElement">
-                      <div className="row ">
-                        {MessagesList.map((msg, index) => {
-                          return (
-                            <>
-                              <div className="col-12 ">
-                                {user._id !== receiver._id &&
-                                user._id !== msg.senderId ? (
-                                  <div className="card rec-body">
-                                    <p className="badge ">{receiver.name}</p>
-                                    <p>{msg.body}</p>
-                                  </div>
-                                ) : (
-                                  ""
-                                )}
-                                {user._id === msg.senderId ? (
-                                  <div className=" card sender-body">
-                                    <p className="badge badge-danger">You</p>
-                                    <p>{msg.body}</p>
-                                  </div>
-                                ) : (
-                                  ""
-                                )}
-                              </div>
-                            </>
-                          );
-                        })}
-                      </div>
-                    </ScrollableFeed>
+                  <div
+                    className="card "
+                    style={{
+                      background: "#fff",
+                      borderRadius: "0"
+                    }}
+                  >
+                    <div className="message-screen">
+                      <ScrollableFeed id="containerElement">
+                        <div className="row ">
+                          {MessagesList.map((msg, index) => {
+                            return (
+                              <>
+                                <div className="col-12 ">
+                                  {user._id !== receiver._id &&
+                                  user._id !== msg.senderId ? (
+                                    <>
+                                      <div className=" card rec-body">
+                                        <small className="text-muted text-left ">
+                                          {receiver.name}
+                                        </small>
+                                        <div
+                                          className="card rec-message"
+                                          style={{
+                                            overflowWrap: "break-word"
+                                          }}
+                                        >
+                                          <p className="text-left">
+                                            {msg.body}
+                                          </p>
+                                        </div>
+
+                                        <small className="text-muted text-right ">
+                                          {moment(msg.sendAt).format(
+                                            "MMMM Do YYYY, h:mm:ss a"
+                                          )}
+                                        </small>
+                                      </div>
+                                    </>
+                                  ) : (
+                                    ""
+                                  )}
+                                  {user._id === msg.senderId ? (
+                                    <>
+                                      <div className=" card sender-body">
+                                        <small className="text-muted text-right ">
+                                          You
+                                        </small>
+                                        <div
+                                          className="card sender-message"
+                                          style={{
+                                            overflowWrap: "break-word"
+                                          }}
+                                        >
+                                          <p className="text-left">
+                                            {msg.body}
+                                          </p>
+                                        </div>
+
+                                        <small className="text-muted text-left ">
+                                          {moment(msg.sendAt).format(
+                                            "MMMM Do YYYY, h:mm:ss a"
+                                          )}
+                                        </small>
+                                      </div>
+                                    </>
+                                  ) : (
+                                    ""
+                                  )}
+                                </div>
+                              </>
+                            );
+                          })}
+                        </div>
+                      </ScrollableFeed>
+                    </div>
                   </div>
 
-                  <form className="mb-0">
-                    <textarea
-                      rows="3"
-                      onChange={this.handleChange}
-                      type="text"
-                      value={message}
-                      style={{ width: "100%" }}
-                    />
-                    <button
-                      onClick={this.SendMsg}
-                      className="btn btn-block btn-secondary btn-raised"
-                    >
-                      Send
-                    </button>
-                  </form>
+                  <div
+                    className="card"
+                    style={{ background: "#f0f0f0", borderRadius: "0" }}
+                  >
+                    <div className="container-fluid text-left send-message-box">
+                      <div className="row">
+                        <div className="col-8 p-1">
+                          <textarea
+                            rows="1"
+                            placeholder="Type a message"
+                            onChange={this.handleChange}
+                            type="text"
+                            className="chat-input"
+                            value={message}
+                            onKeyPress={() => this.IsTyping()}
+                          />
+                        </div>
+                        <div className="col-4 p-1">
+                          <div className="container-fluid text-right">
+                            <button
+                              onClick={this.SendMsg}
+                              className=" chat-button btn btn-raised "
+                            >
+                              <IoMdSend
+                                style={{
+                                  fontSize: "22px",
+                                  marginBottom: "-5px"
+                                }}
+                              />
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

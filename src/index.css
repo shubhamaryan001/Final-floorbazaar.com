@@ -193,8 +193,9 @@ code {
   }
   .section-standard-height {
     background-color: #fff !important;
-    padding-top: 5px !important;
-    padding-bottom: 5px !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    min-height: 70vh !important;
   }
   .header-part-two {
     padding-top: 25px;
@@ -219,6 +220,15 @@ code {
     font-size: 1em;
     font-weight: 400;
     letter-spacing: 2px;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .section-standard-height {
+    background-color: #fff !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    min-height: 70vh !important;
   }
 }
 
@@ -848,20 +858,53 @@ section .section-title {
 }
 
 /* --------------------CHAT PAGE--------------------------- */
+.right-bar {
+}
+.chat-header {
+  padding: 5px;
+  min-height: 60px;
+  width: 100%;
+  background-color: #f0f0f0;
+}
+
+.chat-input {
+  padding: 15px;
+  margin: 5px;
+  min-width: 100%;
+  border: none;
+  border-radius: 30px;
+}
+.chat-input:focus {
+  outline-width: 0;
+}
+.chat-button {
+  margin-top: 15px;
+  border-radius: 30px;
+  padding: 5px 15px 5px 15px;
+}
 .message-screen {
-  max-height: 40vh;
-  margin-bottom: 10px;
-  background-color: #eeeeee;
-  overflow-x: hidden;
+  min-height: 60vh;
+  max-height: 60vh;
+  background-color: #fff;
+  overflow-x: hidden !important;
 }
 .styles_scrollable-div__1DOyU {
   overflow-x: hidden !important;
 }
 .rec-body {
   float: left;
-  margin: 15px;
+  margin: 10px 15px 10px 15px;
   padding: 8px;
+  max-width: 80%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 0;
+  color: #fff;
+}
+.rec-message {
   background-color: #11dc61;
+  padding: 8px 10px 8px 10px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -875,8 +918,18 @@ section .section-title {
 
 .sender-body {
   float: right;
-  margin: 15px;
-  padding: 8px;
+  max-width: 80%;
+  margin: 10px 15px 10px 15px;
+  padding: 5px 8px 5px 8px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 10px;
+  color: #fff;
+}
+
+.sender-message {
+  padding: 8px 10px 8px 10px;
   background-color: #f46c45;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -1252,7 +1305,27 @@ section .section-title {
   padding-bottom: 5rem;
   padding-left: 0 !important;
   padding-right: 0 !important;
-  min-height: 70vh !important;
+  min-height: 70vh;
+}
+
+@media (max-width: 770px) {
+  .section-standard-height-chat {
+    background-color: #fff !important;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    min-height: 150vh !important;
+  }
+}
+
+.section-standard-height-chat {
+  background-color: #fff !important;
+  padding-top: 8rem;
+  padding-bottom: 5rem;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  min-height: 100vh;
 }
 
 .heading-gradient {

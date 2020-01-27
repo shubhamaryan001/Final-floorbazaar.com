@@ -9,7 +9,7 @@ import { signout } from "../Auth/Index";
 import Dropdown from "react-bootstrap/Dropdown";
 import Noti from "../User/Notifcation";
 import "../index.css";
-const UsersProfile = () => {
+const UsersProfile = props => {
   const [order, setOrder] = useState([]);
   const [RedirectPage, setRedirectPage] = useState(false);
   let {
@@ -329,13 +329,16 @@ const UsersProfile = () => {
                       <div className="text-left p-3 font-weight-bold">
                         <Link
                           className="btn   btn-sm"
-                          to={`/profile/${_id}`}
                           style={{
                             background: "#f46c45",
                             color: "#fff",
                             borderRadius: "5px"
                           }}
-                          onClick={() => signoutprofile(() => {})}
+                          onClick={() =>
+                            signoutprofile(() => {
+                              props.history.push("/");
+                            })
+                          }
                         >
                           <b>
                             Log Out

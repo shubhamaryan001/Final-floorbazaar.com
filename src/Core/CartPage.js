@@ -5,7 +5,6 @@ import Checkout from "./Checkout";
 import { API } from "../config";
 import "../index.css";
 import { isAuthenticated } from "../Auth/Index";
-
 export const url = window.location.href.split("/cart");
 
 const CartPage = () => {

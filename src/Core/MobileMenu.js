@@ -20,35 +20,18 @@ const { user } = isAuthenticated();
 const MobileMenu = ({ history }) => {
   return (
     <>
-      {/* <Navbar className="mobile-menu" fixed="top" bg="light">
+      <Navbar className="mobile-menu" sticky="top" bg="light">
         <Nav className="block-center">
-          <Link className="nav-link" style={isActive(history, "/")} to="/">
-            <FaHome className="menu-icon" />
-            <p>Home</p>
+          <Link className="navbar-brand" to="/">
+            <img
+              src="https://res.cloudinary.com/djnv06fje/image/upload/v1574864028/1_bsry6v.png"
+              width="180"
+              height="90"
+              alt=""
+            />
           </Link>
         </Nav>
-        <Nav className="block-center">
-          <Link
-            className="nav-link"
-            style={isActive(history, "/shop")}
-            to="/shop"
-          >
-            <AiFillShop className="menu-icon" />
-            <br />
-            <p>Shop</p>
-          </Link>
-        </Nav>
-        <Nav className="block-center">
-          <Link
-            className="nav-link"
-            style={isActive(history, "/profile")}
-            to="/profile"
-          >
-            <MdAccountCircle className="menu-icon" />
-            <p>Account</p>
-          </Link>
-        </Nav>
-      </Navbar> */}
+      </Navbar>
       <Navbar className="mobile-menu" fixed="bottom" bg="light">
         <Nav className="block-center">
           <Link className="nav-link" style={isActive(history, "/")} to="/">

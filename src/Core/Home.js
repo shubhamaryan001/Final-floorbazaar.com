@@ -3,18 +3,36 @@ import ModalVideo from "react-modal-video";
 import { FaPlay } from "react-icons/fa";
 import Typed from "react-typed";
 import Slide from "react-reveal/Slide";
-
+import { Link } from "react-router-dom";
 import Trending from "./TrendingSection";
 import Blurb from "./BlurbMain";
 import HomeProduct from "./MainPageProducts";
+import { read } from "./ApiCore";
 
 export default class Home extends Component {
   constructor() {
     super();
     this.state = {
-      isOpen: false
+      isOpen: false,
+      floorplan: "",
+      error: ""
     };
     this.openModal = this.openModal.bind(this);
+  }
+
+  loadSingleBasic = () => {
+    const floorId = "5dcafc367c8c423494f9e496";
+    read(floorId).then(data => {
+      if (data.error) {
+        this.setState({ error: data.error });
+      } else {
+        this.setState({ floorplan: data });
+      }
+    });
+  };
+
+  componentDidMount() {
+    this.loadSingleBasic();
   }
 
   openModal() {
@@ -22,79 +40,146 @@ export default class Home extends Component {
   }
 
   render() {
+    const { floorplan } = this.state;
     return (
       <div className="main-page">
         <div className="container-fluid  background-main color-background">
-          <div className="container  p-3" style={{ minWidth: "75%" }}>
+          <div className="container  p-1  ">
             <div className="row">
-              <div className="col-xl-6 col-md-6 col-sm-12">
-                <Slide duration={1500} left>
-                  <div className="header-part-1">
-                    <div
-                      className="card overlay overlay-color"
-                      style={{
-                        width: "",
-                        height: "50vh",
-                        borderRadius: "50px 50px 50px 0 "
-                      }}
-                    >
-                      <img
-                        style={{
-                          width: "",
-                          height: "50vh",
-                          borderRadius: "50px 50px 50px 0 "
-                        }}
-                        className="img-fluid "
-                        src="https://res.cloudinary.com/djnv06fje/image/upload/v1575181486/pricing-top_uouxge.jpg"
-                        alt="video-intro"
-                      />
-
-                      <div>
-                        <ModalVideo
-                          channel="youtube"
-                          autoplay="1"
-                          isOpen={this.state.isOpen}
-                          videoId="EU0d67eNPTU"
-                          onClose={() => this.setState({ isOpen: false })}
-                        />
-                        <button
-                          className="btn btn-raised  button-center"
-                          onClick={this.openModal}
+              <div className="col-xl-4 col-md-4 col-sm-12">
+                <div className="container-fluid p-0">
+                  <div className="card right-box p-2">
+                    <div className="header text-left">
+                      <h4
+                        className="mb-0"
+                        style={{ fontSize: "25px", fontWeight: "600" }}
+                      >
+                        WE'LL GET YOUR PROJECT DONE
+                      </h4>
+                      <small>One stop solution for all your needs.</small>
+                    </div>
+                    <div className="sections">
+                      <div className="block-1 pt-2">
+                        <h4
+                          style={{
+                            fontSize: "19px",
+                            fontWeight: "700",
+                            color: "rgb(251, 162, 17)"
+                          }}
                         >
-                          <FaPlay className="animated-button animated infinite" />
-                          Play
-                        </button>
-                        <h4 className="heading-center">How We Work</h4>
+                          ARCHITECTURE
+                        </h4>
+                        <ul>
+                          <li>Floor Planning</li>
+                          <li>Electrical Layout</li>
+                          <li>Plumbing Layout</li>
+                          <li>Door/Window Designs</li>
+                        </ul>
+                      </div>
+
+                      <div className="block-1">
+                        <h4
+                          style={{
+                            fontSize: "19px",
+                            fontWeight: "700",
+                            color: "rgb(251, 162, 17)"
+                          }}
+                        >
+                          3D VISUALIZATION
+                        </h4>
+                        <ul>
+                          <li>3D Front Elevation</li>
+                          <li>3D Video Walkthru</li>
+                          <li>3D Interior Views</li>
+                          <li>3D Floor Plans</li>
+                          <li>Township 3D Walkthru</li>
+                          <li>Bunglow 3D Walkthru</li>
+                          <li>Appartment 3D Tour</li>
+                        </ul>
+                      </div>
+
+                      <div className="block-1 ">
+                        <h4
+                          style={{
+                            fontSize: "19px",
+                            fontWeight: "700",
+                            color: "rgb(251, 162, 17)"
+                          }}
+                        >
+                          STRUCTURE
+                        </h4>
+                        <ul>
+                          <li>Footing Layout</li>
+                          <li>Tie-Beam Layout</li>
+                          <li>Column Layout</li>
+                          <li>Beam Layout</li>
+                          <li>Slab Layout</li>
+                        </ul>
                       </div>
                     </div>
                   </div>
-                </Slide>
+                </div>
               </div>
-              <div className="col-xl-6 col-md-6 col-sm-12">
-                <div className="header-part-two ">
-                  <Slide duration={1500} right>
-                    <h1 style={{ color: "white" }}>
-                      Welcome to Floor Plan Bazaar
-                    </h1>
-                    <div>
-                      <h1 style={{ color: "white" }}>
-                        <Typed
-                          strings={["FLOOR PLAN'S AT ₹999"]}
-                          typeSpeed={80}
-                          backSpeed={50}
-                          loop
-                        ></Typed>
-                      </h1>
-
-                      <p className="animated flash  infinite text-muted">
-                        <sup>*</sup> LIMITED TIME OFFER
-                      </p>
-                    </div>
-                    <p>
-                      We'll get your project done One stop solution for all your
-                      needs.
+              <div className="col-xl-8 col-md-8 col-sm-12 align-self-center">
+                <div className="container-fluid p-0">
+                  <div className="card  left-box">
+                    <p style={{ fontSize: "20px", textAlign: "center" }}>
+                      PREMIUM BUT AFFORDABLE SERVICES FOR EVERYONE​ ​
+                      RESIDENTIAL OR COMMERCIAL PROJECTS ​ GET EVERYTHING ONLINE
+                      . ALL ACROSS INDIA
                     </p>
-                  </Slide>
+                    <div className="content-left text-center">
+                      <h2
+                        style={{
+                          fontSize: "50px",
+                          fontWeight: "700",
+                          color: "rgb(251, 162, 17)"
+                        }}
+                      >
+                        FLOOR PLAN'S
+                      </h2>
+
+                      <h3
+                        style={{
+                          fontSize: "50px",
+                          fontWeight: "700",
+                          color: "#000"
+                        }}
+                      >
+                        ₹{floorplan.price}
+                      </h3>
+                      <h2
+                        style={{
+                          fontWeight: "350",
+                          color: "rgb(251, 162, 17)"
+                        }}
+                      >
+                        LIMITED TIME OFFER
+                      </h2>
+                      <p style={{ fontSize: "20px" }}>
+                        Get Design for your Size Plot. ​ Get Two Different
+                        Options.
+                      </p>
+                      <h3
+                        style={{
+                          color: "rgb(251, 162, 17)"
+                        }}
+                      >
+                        DESIGN'S MADE BY EXPERIANCED ARCHITECT'S
+                      </h3>
+
+                      <Link
+                        className="btn btn-raised "
+                        style={{
+                          background: "rgb(251, 162, 17)",
+                          color: "#FFF",
+                          borderRadius: "30px"
+                        }}
+                      >
+                        Buy Now
+                      </Link>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

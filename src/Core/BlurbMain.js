@@ -14,7 +14,7 @@ export default class BlurbMain extends Component {
         <div className="container" style={{ minWidth: "80%" }}>
           <div className="row">
             <div className="col-xl-3 col-md-3 col-sm-12">
-              <Fade center duration={500} delay={500}>
+              <Fade center duration={500} delay={150}>
                 <div
                   className="card blurb-card"
                   style={{
@@ -38,7 +38,7 @@ export default class BlurbMain extends Component {
               </Fade>
             </div>
             <div className="col-xl-3 col-md-3 col-sm-12">
-              <Fade center duration={500} delay={1000}>
+              <Fade center duration={500} delay={250}>
                 <div
                   className="card blurb-card "
                   style={{
@@ -62,7 +62,7 @@ export default class BlurbMain extends Component {
               </Fade>
             </div>
             <div className="col-xl-3 col-md-3 col-sm-12">
-              <Fade center duration={500} delay={1500}>
+              <Fade center duration={500} delay={350}>
                 <div
                   className="card blurb-card"
                   style={{
@@ -86,7 +86,7 @@ export default class BlurbMain extends Component {
               </Fade>
             </div>
             <div className="col-xl-3 col-md-3 col-sm-12">
-              <Fade center duration={500} delay={2000}>
+              <Fade center duration={500} delay={450}>
                 <div
                   className="card blurb-card"
                   style={{

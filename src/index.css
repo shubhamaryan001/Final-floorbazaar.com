@@ -342,10 +342,11 @@ code {
   width: 100%;
   border-radius: 30px;
 }
-.react-player__preview {
+.video-block .react-player__preview {
   border-radius: 30px !important;
 }
 .react-player {
+  min-height: 65vh;
   max-height: 80vh;
   width: 100%;
   border-radius: 30px;
@@ -381,6 +382,12 @@ code {
 @media (max-width: 750px) {
   .most-sized {
     font-size: 35px;
+  }
+  .react-player {
+    min-height: auto;
+    max-height: 80vh;
+    width: 100%;
+    border-radius: 30px;
   }
   .video-cont {
     margin-top: -120px;

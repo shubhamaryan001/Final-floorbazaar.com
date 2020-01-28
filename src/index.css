@@ -345,7 +345,7 @@ code {
 .video-block .react-player__preview {
   border-radius: 30px !important;
 }
-.react-player {
+.video-block .react-player {
   min-height: 65vh;
   max-height: 80vh;
   width: 100%;
@@ -383,7 +383,7 @@ code {
   .most-sized {
     font-size: 35px;
   }
-  .react-player {
+  .video-block .react-player {
     min-height: auto;
     max-height: 80vh;
     width: 100%;

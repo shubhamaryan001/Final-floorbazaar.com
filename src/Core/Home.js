@@ -96,7 +96,6 @@ export default class Home extends Component {
                             strings={[`WE'LL GET YOUR PROJECT DONE`]}
                             typeSpeed={80}
                             backSpeed={20}
-                            loop
                           />
                         </h4>
                       </div>

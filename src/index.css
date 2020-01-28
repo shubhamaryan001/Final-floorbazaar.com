@@ -383,11 +383,11 @@ code {
     font-size: 35px;
   }
   .video-cont {
-    margin-top: -100px;
+    margin-top: -120px;
   }
   .left-box {
     margin-left: 0;
-    margin-top: 0;
+    margin-top: 10px;
     padding-top: 50px !important;
     border-radius: 0;
     box-shadow: none;

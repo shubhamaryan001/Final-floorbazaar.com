@@ -17,9 +17,6 @@ const isActive = (history, path) => {
 const { user } = isAuthenticated();
 
 const Menu = ({ history }) => {
-
-
-  
   return (
     <Navbar fixed="top" className="navbar desktop-menu" expand="lg">
       <div className="container p-0 ">

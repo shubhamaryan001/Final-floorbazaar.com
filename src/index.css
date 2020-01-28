@@ -189,7 +189,7 @@ code {
   }
 
   .background-main {
-    padding: 2rem 0 0 0;
+    padding: 0.2rem 0 0 0;
   }
   .section-standard-height {
     background-color: #fff !important;
@@ -304,6 +304,7 @@ code {
 
 .sections ul {
   padding-left: 15px !important;
+  margin-bottom: 0;
 }
 
 .left-box {
@@ -318,6 +319,48 @@ code {
 }
 .bottom {
   margin-bottom: 500px !important;
+}
+
+.most-sized {
+  text-decoration: none;
+  font-size: 50px;
+  color: rgb(251, 162, 17);
+}
+.video-cont {
+  padding: 0 15px 0 15px;
+  margin-top: -180px;
+}
+
+.video-card {
+  position: relative;
+  z-index: 333;
+  border-radius: 30px;
+}
+.video-img {
+  min-height: 70vh;
+  max-height: 80vh;
+  width: 100%;
+  border-radius: 30px;
+}
+.react-player__preview {
+  border-radius: 30px !important;
+}
+.react-player {
+  max-height: 80vh;
+  width: 100%;
+  border-radius: 30px;
+}
+
+.video-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0 auto;
+  border-radius: 50px;
+  font-size: 25px;
+  color: #000;
+  z-index: 6666;
 }
 
 @media (max-width: 1160px) {
@@ -336,6 +379,12 @@ code {
 }
 
 @media (max-width: 750px) {
+  .most-sized {
+    font-size: 35px;
+  }
+  .video-cont {
+    margin-top: -100px;
+  }
   .left-box {
     margin-left: 0;
     margin-top: 0;

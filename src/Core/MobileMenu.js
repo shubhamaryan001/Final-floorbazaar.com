@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
 import { Link, withRouter } from "react-router-dom";
 import { signout, isAuthenticated } from "../Auth/Index";
-
+import Dropdown from "react-bootstrap/Dropdown";
 import { FaHome } from "react-icons/fa";
 import { AiFillShop } from "react-icons/ai";
 import { MdAccountCircle } from "react-icons/md";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { API } from "../config";
 
 const isActive = (history, path) => {
   if (history.location.pathname === path) {
@@ -15,52 +15,114 @@ const isActive = (history, path) => {
     return { color: "rgba(0,0,0,.5)" };
   }
 };
-const { user } = isAuthenticated();
 
 const MobileMenu = ({ history }) => {
-  return (
-    <>
-      <Navbar className="mobile-menu" sticky="top" bg="light">
-        <Nav className="block-center">
-          <Link className="navbar-brand" to="/">
+  const { user } = isAuthenticated();
+
+  const DefaultImg =
+    "https://res.cloudinary.com/djnv06fje/image/upload/v1577008134/dummy-user-img-1_p1kcf2.png";
+
+  const photourl = () => {
+    if (isAuthenticated()) {
+      return (
+        <div className="text-center " style={{ background: "#FFF " }}>
+          <Link to="/profile">
             <img
-              src="https://res.cloudinary.com/djnv06fje/image/upload/v1574864028/1_bsry6v.png"
-              width="180"
-              height="90"
-              alt=""
+              className="rounded-circle"
+              src={`${API}/user/photo/${user._id}`}
+              alt={user.name}
+              style={{
+                maxHeight: "50px",
+                minHeight: "50px",
+                minWidth: "50px",
+                maxWidth: "50px",
+                objectFit: "cover",
+                border: " 2px solid #fba211"
+              }}
+              onError={i => (i.target.src = `${DefaultImg}`)}
             />
           </Link>
-        </Nav>
-      </Navbar>
-      <Navbar className="mobile-menu" fixed="bottom" bg="light">
-        <Nav className="block-center">
-          <Link className="nav-link" style={isActive(history, "/")} to="/">
-            <FaHome className="menu-icon" />
-            <p>Home</p>
-          </Link>
-        </Nav>
-        <Nav className="block-center">
+        </div>
+      );
+    } else if (!isAuthenticated()) {
+      return (
+        <div className="text-center">
           <Link
-            className="nav-link"
-            style={isActive(history, "/shop")}
-            to="/shop"
+            to="/login"
+            className="btn btn-raised"
+            style={{
+              background: "#fba211",
+              color: "#FFF",
+              borderRadius: "5px",
+              padding: ""
+            }}
           >
-            <AiFillShop className="menu-icon" />
-            <br />
-            <p>Shop</p>
+            Login
           </Link>
-        </Nav>
-        <Nav className="block-center">
-          <Link
-            className="nav-link"
-            style={isActive(history, "/profile")}
-            to="/profile"
-          >
-            <MdAccountCircle className="menu-icon" />
-            <p>Account</p>
-          </Link>
-        </Nav>
-      </Navbar>
+        </div>
+      );
+    }
+  };
+
+  return (
+    <>
+      <div
+        className="container-fluid  fixed-top"
+        style={{
+          background: "#FFF",
+          padding: "0 10px 0 12px",
+          boxShadow: "0px 2px 5px -1px rgba(0,0,0,0.65)"
+        }}
+      >
+        <div className="container" style={{ padding: "0 5px 0 5px" }}>
+          <div className="row">
+            <div className="col-2 p-0 align-self-center ">
+              <div className="block text-center">
+                <Dropdown>
+                  <Dropdown.Toggle variant="dark" id="dropdown-basic">
+                    <GiHamburgerMenu style={{ fontSize: "28px" }} />
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu>
+                    <Dropdown.Item href="#/action-1">About Us</Dropdown.Item>
+                    <Dropdown.Item href="#/action-2">Support</Dropdown.Item>
+                    <div class="dropdown-divider"></div>
+
+                    <Dropdown.Item
+                      onClick={() =>
+                        signout(() => {
+                          history.push("/");
+                        })
+                      }
+                    >
+                      Log-out
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </div>
+            </div>
+            <div className="col-8 p-0">
+              <div
+                className="card"
+                style={{ boxShadow: "none", borderRadius: "0" }}
+              >
+                <Link to="/">
+                  <img
+                    // className="img-fluid"
+                    width="80%"
+                    height="90"
+                    src="https://res.cloudinary.com/djnv06fje/image/upload/v1574864028/1_bsry6v.png"
+                    class="d-inline-block align-top"
+                    alt=""
+                  />
+                </Link>
+              </div>
+            </div>
+
+            <div className="col-2  p-0 align-self-center ">{photourl()}</div>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

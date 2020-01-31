@@ -8,7 +8,6 @@ import { emptyCart } from "./CartHelper";
 import { FiChevronsRight } from "react-icons/fi";
 import { FaCreditCard, FaRegHandPointRight, FaTags } from "react-icons/fa";
 import ReactTooltip from "react-tooltip";
-
 import { razorPayOptionsDirt } from "./RazorpayDirectPay";
 
 import "../index.css";
@@ -288,8 +287,21 @@ const Checkout = ({ products }) => {
     rzp1.open();
     event.preventDefault();
   };
+
+  const createOrderData = {
+    products: products,
+    userId: user._id,
+    amount: amount,
+    payment_mode: "Paytm Gateway",
+    note: anyNote,
+    firstpayment: true,
+    firstpaymentamount: amount,
+    secondpaymentamount: SecondAmount
+  };
+
   return (
     <div className="container-fluid p-0">
+      {console.log(JSON.stringify(createOrderData))}
       <div className="checkout-card card p-1">
         <h3
           className="card-header p-1 "

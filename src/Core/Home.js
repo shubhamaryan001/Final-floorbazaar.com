@@ -261,7 +261,6 @@ export default class Home extends Component {
         >
           <div className="container video-cont ">
             <Slide bottom duration={1200}>
-              {" "}
               <div className="card video-card">
                 <div className="video-block">
                   <ReactPlayer

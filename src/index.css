@@ -3,15 +3,17 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap");
 body,
 html {
-  margin: 0;
-  padding: 0;
+  margin: 0 !important;
+
+  padding: 0 !important;
+  width: 100%;
   background-color: rgb(243, 243, 243);
   /* font-family: "Roboto", sans-serif; */
   font-family: "Poppins", sans-serif;
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  /* overflow-x: scroll; */
   box-sizing: border-box;
 }
 
@@ -189,7 +191,7 @@ code {
   }
 
   .background-main {
-    padding: 0.2rem 0 0 0;
+    padding: 6rem 0 0 0;
   }
   .section-standard-height {
     background-color: #fff !important;
@@ -226,7 +228,7 @@ code {
 @media screen and (max-width: 580px) {
   .section-standard-height {
     background-color: #fff !important;
-    padding-top: 10px !important;
+    padding-top: 6rem !important;
     padding-bottom: 10px !important;
     min-height: 70vh !important;
   }
@@ -788,6 +790,102 @@ section .section-title {
   }
 }
 
+/* --------------------MOBILE LAYOUT---------------------------- */
+
+.Mobilelayout {
+  padding-top: 6rem;
+  min-height: 100vh;
+  padding-left: 0;
+  padding-right: 0;
+  position: sticky !important;
+  top: 0 !important;
+  background-size: cover;
+  background-position: center;
+}
+
+.back {
+  /* background: linear-gradient(-45deg, #ff3838, #fba211);
+  background-size: 400% 400%;
+  animation: gradient 5s ease infinite; */
+
+  background-image: linear-gradient(
+      to right,
+      rgba(244, 107, 69, 0.9),
+      rgba(238, 168, 73, 0.9)
+    ),
+    url("https://res.cloudinary.com/djnv06fje/image/upload/v1577390249/photo-1571566844267-2f4c36350ad1_cguuc5.jpg");
+  background-position: left bottom;
+  background-size: cover;
+
+  animation: gradient 5s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.top-bar {
+  padding: 5px;
+}
+.top-bar h1 {
+  border-left: 3px solid #000;
+  padding-left: 2px;
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+.intro-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+
+  border-radius: 0;
+
+  text-align: center;
+}
+
+.intro-text p {
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+.intro-text-1 p {
+  position: relative;
+  text-transform: uppercase;
+  overflow: hidden;
+  background: linear-gradient(90deg, #000, #fff, #000);
+  background-repeat: no-repeat;
+  background-size: 80%;
+  animation: animate 5s linear infinite;
+
+  letter-spacing: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 0;
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0);
+}
+
+@keyframes animate {
+  0% {
+    background-position: -500%;
+  }
+  100% {
+    background-position: 500%;
+  }
+}
 /* -------------------PRODUCT PAGE--------------------------- */
 .product-box {
   min-width: 80%;
@@ -950,6 +1048,15 @@ section .section-title {
 }
 
 /* ----------------MOBIlE MENU------------------ */
+.dropdown-toggle:after {
+  border-top: 0 !important;
+}
+
+.btn,
+.custom-file-control:before {
+  padding: 5px !important;
+}
+
 .mobile-menu {
   display: none;
   z-index: 2000 !important;

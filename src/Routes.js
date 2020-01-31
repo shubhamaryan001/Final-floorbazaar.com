@@ -18,6 +18,7 @@ import Chat from "./User/Support";
 import UserChat from "./User/UserSupport";
 import SingleChat from "./User/SingleSupport";
 import UpdateUser from "./User/UpdateProfile";
+import MobileLayout from "./Core/MobileLayout";
 const Routes = () => {
   return (
     <BrowserRouter>
@@ -26,6 +27,8 @@ const Routes = () => {
       <ScrollToTop>
         <Switch>
           <Route path="/" exact component={Home} />
+          <Route path="/mobile" exact component={MobileLayout} />
+
           <Route path="/product/:productId" exact component={SingleProduct} />
           <Route path="/login" exact component={Login} />
           <Route path="/signup" exact component={Signup} />
@@ -48,7 +51,7 @@ const Routes = () => {
         </Switch>
       </ScrollToTop>
 
-      <Footer />
+      {/* <Footer /> */}
     </BrowserRouter>
   );
 };

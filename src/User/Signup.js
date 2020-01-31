@@ -6,7 +6,7 @@ import GoogleForm from "./GoogleSocialLogin";
 import FacebookForm from "./FacebookSocialLogin";
 import "../index.css";
 
-const Signup = () => {
+const Signup = props => {
   const [values, setValues] = useState({
     name: "",
     email: "",
@@ -21,29 +21,60 @@ const Signup = () => {
     setValues({ ...values, error: false, [name]: event.target.value });
   };
 
+  const isValid = () => {
+    if (mobile.length > 10) {
+      setValues({
+        ...values,
+        error: "Mobile Number Should Be  10 Digits",
+        loading: false
+      });
+      return false;
+    }
+    if (mobile.length < 10) {
+      setValues({
+        ...values,
+        error: "Mobile Number Must Be  10 Digits",
+        loading: false
+      });
+      return false;
+    }
+    if (mobile.length === 0) {
+      setValues({
+        ...values,
+        error: "Mobile Number Must Required",
+        loading: false
+      });
+      return false;
+    }
+    return true;
+  };
   const clickSubmit = event => {
     event.preventDefault();
     setValues({ ...values, error: false, loading: true });
-    signup({ name, email, mobile, password }).then(data => {
-      if (data.error) {
-        setValues({
-          ...values,
-          error: data.error,
-          success: false,
-          loading: false
-        });
-      } else {
-        setValues({
-          ...values,
-          name: "",
-          email: "",
-          mobile: "",
-          password: "",
-          error: "",
-          success: true
-        });
-      }
-    });
+
+    if (isValid()) {
+      signup({ name, email, mobile, password }).then(data => {
+        if (data.error) {
+          setValues({
+            ...values,
+            error: data.error,
+            success: false,
+            loading: false
+          });
+        } else {
+          setValues({
+            ...values,
+            name: "",
+            email: "",
+            mobile: "",
+            password: "",
+            error: "",
+            success: true
+          });
+          props.history.push("/profile");
+        }
+      });
+    }
   };
 
   const signUpForm = () => (

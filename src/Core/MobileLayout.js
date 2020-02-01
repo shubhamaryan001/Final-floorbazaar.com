@@ -186,11 +186,15 @@ export default class MobileLayout extends Component {
         </div>
 
         <div className="container-fluid Mobilelayout-2 bg-light">
-          <div className="container "></div>
+          <div className="container ">
+            <h4>Second Slide</h4>
+          </div>
         </div>
 
         <div className="container-fluid Mobilelayout-2 bg-success">
-          <div className="container "></div>
+          <div className="container ">
+            <h4>THird Slide</h4>
+          </div>
         </div>
       </>
     );

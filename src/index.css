@@ -796,6 +796,8 @@ section .section-title {
   padding-top: 5.7rem;
   min-height: 100vh;
 
+  background-color: #eeeeee;
+
   padding-left: 0;
   padding-right: 0;
 }
@@ -803,7 +805,6 @@ section .section-title {
 .Mobilelayout-2 {
   padding-top: 2rem;
   height: 100vh;
-
   padding-left: 0;
   padding-right: 0;
   position: sticky !important;
@@ -824,7 +825,7 @@ section .section-title {
 
   background-image: linear-gradient(
       to right,
-      rgba(244, 107, 69, 0.9),
+      rgba(255, 56, 56, 1),
       rgba(238, 168, 73, 0.9)
     ),
     url("https://res.cloudinary.com/djnv06fje/image/upload/v1577390249/photo-1571566844267-2f4c36350ad1_cguuc5.jpg");

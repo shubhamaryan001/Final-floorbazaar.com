@@ -60,12 +60,12 @@ export default class MobileLayout extends Component {
     const { floorplan } = this.state;
     return (
       <>
-        <div className="container-fluid Mobilelayout bg-light">
+        <div className="container-fluid Mobilelayout">
           <div className="container ">
             <div className="row">
               <div
-                className="col-12 mb-1"
-                style={{ padding: "5px 5px 2px 5px" }}
+                className="col-12 "
+                style={{ padding: "5px 5px 2px 5px", marginBottom: "8px" }}
               >
                 <div className="card back p-3 text-left">
                   <Fade center duration={1500} delay={2000}>
@@ -147,11 +147,21 @@ export default class MobileLayout extends Component {
             </div>
           </div>
 
-          <div className="container p-0">
-            <div className="col-12 " style={{ padding: "0 5px 5px 5px" }}>
+          <div
+            className="container"
+            style={{
+              background: "#FFF",
+              padding: "5px 0 5px 0",
+              marginBottom: "5px"
+            }}
+          >
+            <div className="col-12" style={{ padding: "0 5px 0 5px" }}>
               <Slide bottom duration={1200}>
-                <div className="card video-home">
-                  <div className="card intro-text">
+                <div className="card video-home" style={{ boxShadow: "none" }}>
+                  <div
+                    className="card intro-text"
+                    style={{ boxShadow: "none" }}
+                  >
                     <p>INTRODUCTION VIDEO</p>
                     <div className="intro-text-1">
                       <p>Please Play This Video</p>
@@ -168,19 +178,18 @@ export default class MobileLayout extends Component {
                 </div>
               </Slide>
             </div>
-          </div>
-
-          <div className="container p-0">
-            <div className="col-12  mb-1" style={{ padding: "0 5px 0 5px" }}>
-              <Slide bottom duration={1200}>
-                <div className="card">
-                  <img
-                    style={{ width: "100%" }}
-                    src="https://res.cloudinary.com/djnv06fje/image/upload/v1580568278/mobile-2_gkba4z.png"
-                    alt="Process"
-                  />
-                </div>
-              </Slide>
+            <div className="container p-0">
+              <div className="col-12" style={{ padding: "0 5px 0 5px" }}>
+                <Slide bottom duration={1200}>
+                  <div className="card" style={{ boxShadow: "none" }}>
+                    <img
+                      style={{ width: "100%" }}
+                      src="https://res.cloudinary.com/djnv06fje/image/upload/v1580633997/col_r8yhqp.png"
+                      alt="Process"
+                    />
+                  </div>
+                </Slide>
+              </div>
             </div>
           </div>
         </div>
